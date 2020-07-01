@@ -3,6 +3,8 @@ package com.example.phobiaquiz_app;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     TestItem item;
     HashMap<String,String>  userTestResults;   // hashmap to store test results for 1 run
                                                 // picture name and sentiment score are stored
+    Context context;
 
     /*
     static int pictures[] = {R.drawable.picture1, R.drawable.picture2,
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = getApplicationContext();
 
         userTestResults = new HashMap<>();
         //item = new TestItem(imageCount,this);
@@ -135,29 +139,37 @@ public class MainActivity extends AppCompatActivity {
          *
          * See if I can disable this button until user has ranked all images
          * Display a toast to user if they have not finished quiz
-         * display a completion toast upon sucesfull attempt
+         * display a completion toast upon successful attempt
          *
          * use the results stored inside the hashmap to build out the results for the user
          */
         submitButton = findViewById(R.id.submitButton);
-        //submitButton.setEnabled(false);
         submitButton.setOnClickListener(v -> {
-            if(userTestResults.size() > 7) {
+            if(userTestResults.size() > 7) {    //user finished quiz, launch results activity
                 Toast.makeText(getApplicationContext(), "Submission Successful", Toast.LENGTH_SHORT).show();
-                //submitButton.setEnabled(true);
-                // going to iterate through hashmap tosee what values are stored there
+                //----------
+                // ** Debug Code **
+                // going to iterate through hashmap to see what values are stored there
                 System.out.println("Results");
                 for(int i = 1;i <= userTestResults.size(); i++) {
                     String temp = "picture" + i;
                     System.out.println(temp);
                     System.out.println(userTestResults.get(temp));
                 }
-            } else {
-                //submitButton.setEnabled(false);
+
+                // Code block below begins results activity and passes over needed data
+                String userNameTemp = "Adam";
+                Intent resultActivityIntent = new Intent(this, ResultsActivity.class);
+                resultActivityIntent.putExtra("data",userTestResults);  // send hashmap with results data
+                resultActivityIntent.putExtra("userName",userNameTemp); // send user name
+                startActivity(resultActivityIntent);    // launch new activity
+                //-----------
+            } else {        // user did not finish quiz
                 Toast.makeText(getApplicationContext(), "Please finish quiz before submission", Toast.LENGTH_SHORT).show();
             }
 
         });
+        // ----------------------------------------------------------------------------------------
 
 
     }
