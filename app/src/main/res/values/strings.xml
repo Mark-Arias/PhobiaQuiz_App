@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PhobiaQuiz_App</string>
+    <string name="neutral">Neutral</string>
+    <string name="postive">Postive</string>
+    <string name="negative">Negative</string>
+    <string name="images">images</string>
+</resources>
