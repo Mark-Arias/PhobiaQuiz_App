@@ -9,6 +9,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SeekBar;
+import android.widget.Toast;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,12 +19,15 @@ public class MainActivity extends AppCompatActivity {
     ImageView image;
     ImageButton leftButton;
     ImageButton rightButton;
+    ImageButton submitButton;
     SeekBar seekBar;
     ListView listView;
     PictureGalleryFragment pictureFragment;
     int imageCount = 1;
     String imageIdentifier = "picture";
     TestItem item;
+    HashMap<String,String>  userTestResults;   // hashmap to store test results for 1 run
+                                                // picture name and sentiment score are stored
 
     /*
     static int pictures[] = {R.drawable.picture1, R.drawable.picture2,
@@ -37,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        item = new TestItem(imageCount,this);
-        //image = (ImageView) findViewById(R.id.imageView);       // set image to UI asset
-        //image.setImageResource(R.drawable.picture1);     // display default
+        userTestResults = new HashMap<>();
+        //item = new TestItem(imageCount,this);
+        image = (ImageView) findViewById(R.id.imageView);       // set image to UI asset
+        image.setImageResource(R.drawable.picture1);     // display default
 
         // ----------------------------------------------------------------------------------------
         // Create seekBar widget and a event listener for it
@@ -73,12 +80,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             // Operations to perform when the user releases the seek bar
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                //item.setUserEmotionalResponseScore(progress);   // set score to seek value user stopped at
+
+                String temp = imageIdentifier + getImageCount();
+                System.out.println("Value: " + temp);
+                userTestResults.put(temp,Integer.toString(seekBar.getProgress()));
 
             }
         });
@@ -92,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
             resetSeekBar();
             decrementImageCount();
             changeImageFragment(imageIdentifier,getImageCount());
+            //String temp = imageIdentifier + getImageCount();
+            //userTestResults.put(temp,)
 
         });
         // ----------------------------------------------------------------------------------------
@@ -101,12 +114,50 @@ public class MainActivity extends AppCompatActivity {
         rightButton = findViewById(R.id.imageButtonRight);
         rightButton.setOnClickListener(v -> {
 
+            if(seekBar.getProgress() == 50) {   // user left seekBar in default state
+                String temp = imageIdentifier + getImageCount();
+                userTestResults.put(temp,Integer.toString(seekBar.getProgress()));
+            }
+
             resetSeekBar();
             incrementImageCount();
             changeImageFragment(imageIdentifier,getImageCount());
 
+
+
         });
         // ----------------------------------------------------------------------------------------
+        /**
+         * Block defines submit button
+         *
+         * User uses this button to turn in the results they have logged and
+         * should load a results activity with their scores and info about their psychology test run
+         *
+         * See if I can disable this button until user has ranked all images
+         * Display a toast to user if they have not finished quiz
+         * display a completion toast upon sucesfull attempt
+         *
+         * use the results stored inside the hashmap to build out the results for the user
+         */
+        submitButton = findViewById(R.id.submitButton);
+        //submitButton.setEnabled(false);
+        submitButton.setOnClickListener(v -> {
+            if(userTestResults.size() > 7) {
+                Toast.makeText(getApplicationContext(), "Submission Successful", Toast.LENGTH_SHORT).show();
+                //submitButton.setEnabled(true);
+                // going to iterate through hashmap tosee what values are stored there
+                System.out.println("Results");
+                for(int i = 1;i <= userTestResults.size(); i++) {
+                    String temp = "picture" + i;
+                    System.out.println(temp);
+                    System.out.println(userTestResults.get(temp));
+                }
+            } else {
+                //submitButton.setEnabled(false);
+                Toast.makeText(getApplicationContext(), "Please finish quiz before submission", Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
 
     }

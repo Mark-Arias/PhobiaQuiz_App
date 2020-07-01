@@ -11,6 +11,20 @@
         android:layout_height="211dp"
         android:layout_gravity="bottom">
 
+        <ImageButton
+            android:id="@+id/submitButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            android:src="@drawable/submiticon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.894" />
+
         <TextView
             android:id="@+id/neutralLabel"
             android:layout_width="125dp"
