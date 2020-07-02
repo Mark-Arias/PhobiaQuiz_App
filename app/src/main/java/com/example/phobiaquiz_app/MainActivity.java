@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
          */
         submitButton = findViewById(R.id.submitButton);
         submitButton.setOnClickListener(v -> {
-            if(userTestResults.size() > 7) {    //user finished quiz, launch results activity
+            if(userTestResults.size() > 9) {    //user finished quiz, launch results activity
                 Toast.makeText(getApplicationContext(), "Submission Successful", Toast.LENGTH_SHORT).show();
                 //----------
                 // ** Debug Code **
@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void incrementImageCount() {
-        if(imageCount < 8) {
+        if(imageCount < 10) {
             imageCount++;
         }
     }
