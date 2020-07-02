@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener((v) -> {
             if(credentialsDictionary.containsKey(userNameField.getText().toString())) {
                 Intent welcomeIntent = new Intent(getApplicationContext(),MainActivity.class);  //launch main activity
-                welcomeIntent.putExtra("userInfo",userNameField.getText().toString());        // send user data over to next activity that needs it
+                welcomeIntent.putExtra("userName",userNameField.getText().toString());        // send user data over to next activity that needs it
                 startActivity(welcomeIntent);
             } else {                                                                                // login not sucessfull
                 Toast toast = Toast.makeText(context, "Try again. Login not successful.", Toast.LENGTH_LONG);

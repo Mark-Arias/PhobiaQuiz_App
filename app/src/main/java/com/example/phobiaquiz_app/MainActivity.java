@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     int imageCount = 1;
     String imageIdentifier = "picture";
     TestItem item;
+    String userName;
     HashMap<String,String>  userTestResults;   // hashmap to store test results for 1 run
                                                 // picture name and sentiment score are stored
     Context context;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = getApplicationContext();
 
+
+        userName = getIntent().getStringExtra("userName");  // get user name from log in
 
 
         userTestResults = new HashMap<>();
@@ -176,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 String userNameTemp = "Adam";
                 Intent resultActivityIntent = new Intent(this, ResultsActivity.class);
                 resultActivityIntent.putExtra("data",userTestResults);  // send hashmap with results data
-                resultActivityIntent.putExtra("userName",userNameTemp); // send user name
+                resultActivityIntent.putExtra("userName",userName); // send user name
                 startActivity(resultActivityIntent);    // launch new activity
                 //-----------
             } else {        // user did not finish quiz
