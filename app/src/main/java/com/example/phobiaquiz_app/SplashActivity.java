@@ -14,7 +14,7 @@ public class SplashActivity extends Activity
         setContentView(R.layout.splash_activity);
 
         // Splash screen timer
-        int SPLASH_TIME_OUT = 6000;
+        int SPLASH_TIME_OUT = 2000;     // change this later to a different delay if desired
         new Handler().postDelayed(new Runnable() {
 
             /*
@@ -25,7 +25,7 @@ public class SplashActivity extends Activity
             @Override
             public void run() {
 
-                Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                Intent i = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(i);
                 finish();
             }

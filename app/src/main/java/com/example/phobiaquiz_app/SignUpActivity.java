@@ -81,7 +81,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         // add validation to form view objects
         awesomeValidation.addValidation(this, R.id.userNameField, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.nameerror);
-        String regexPassword = "^(?=.*?[0-9]).{8,}$";    // include at least one number 0-9, and be at least of length 8
+        String regexPassword = "^(?=.*?[0-9]).{4,}$";    // include at least one number 0-9, and be at least of length 4
         awesomeValidation.addValidation(this, R.id.passwordField, regexPassword, R.string.nameerror);
         awesomeValidation.addValidation(this, R.id.validatePasswordField, regexPassword, R.string.nameerror);
         awesomeValidation.addValidation(this, R.id.emailField, Patterns.EMAIL_ADDRESS, R.string.nameerror);

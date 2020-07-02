@@ -7,10 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -172,6 +175,47 @@ public class MainActivity extends AppCompatActivity {
         // ----------------------------------------------------------------------------------------
 
 
+    }
+
+    //----------------------------------------------------------------------------------------------
+    /**
+     * Method creates an options menu and inflatues the menu designed and specified in the menu_main.xml
+     * file
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    //----------------------------------------------------------------------------------------------
+    /**
+     * Method defines what operations to perform and actions to take when user selects a item
+     * from the menu bar
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.add:
+                Toast.makeText(this, "Add selected", Toast.LENGTH_LONG).show();
+                return(true);
+
+            case R.id.about:
+                Toast.makeText(this, "About selected", Toast.LENGTH_LONG).show();
+                return(true);
+
+            case R.id.exit:
+                Toast.makeText(this, "Good bye user", Toast.LENGTH_LONG).show();
+                finish();
+                return(true);
+
+        }
+        return(super.onOptionsItemSelected(item));
     }
 
     //----------------------------------------------------------------------------------------------

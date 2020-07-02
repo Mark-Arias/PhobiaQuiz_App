@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
+
     <fragment
         android:id="@+id/albumControlFragment"
         android:name="com.example.phobiaquiz_app.AlbumControlFragment"
