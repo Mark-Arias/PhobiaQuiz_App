@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         // -----------------------------------------------------------------------------------------
         // perform Hashmap data operations
         credentialsDictionary = new HashMap<String,String>();                                       // initialize the hashmap
-        //credentialsDictionary.put("mark","123");                                                  //
+        credentialsDictionary.put("mark","123");                                                  //
         if((HashMap<String, String>) getIntent().getSerializableExtra("data")!= null) {       // attempt to retrieve an existing hashmap existence if it already exists or was modified in another activity
             credentialsDictionary = (HashMap<String, String>) getIntent().getSerializableExtra("data");
         }

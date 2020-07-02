@@ -44,11 +44,23 @@ public class MainActivity extends AppCompatActivity {
 
      */
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //TODO: Work on this if there is time
+        /*
+        if(savedInstanceState != null) {
+            pictureFragment = PictureGalleryFragment.newInstance(imageIdentifier, imageCount);
+
+        }
+         */
+
         setContentView(R.layout.activity_main);
         context = getApplicationContext();
+
+
 
         userTestResults = new HashMap<>();
         //item = new TestItem(imageCount,this);
@@ -177,6 +189,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //Save the fragment's instance
+        getSupportFragmentManager().putFragment(outState, "pictureFragmentSaveKey", pictureFragment);
+    }
+     */
+
+
+
     //----------------------------------------------------------------------------------------------
     /**
      * Method creates an options menu and inflatues the menu designed and specified in the menu_main.xml
@@ -201,18 +225,37 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.add:
-                Toast.makeText(this, "Add selected", Toast.LENGTH_LONG).show();
+
+            case R.id.changePassword:
+                Toast.makeText(this, "Change password selected", Toast.LENGTH_LONG).show();
+                return(true);
+
+            case R.id.changeProfile:
+                Toast.makeText(this, "Change profile selected", Toast.LENGTH_LONG).show();
+                Intent changeProfileIntent = new Intent(this, SignUpActivity.class);
+                startActivity(changeProfileIntent);    // launch new activity
+                return(true);
+
+            case R.id.help:
+                Toast.makeText(this, "Help selected", Toast.LENGTH_LONG).show();
                 return(true);
 
             case R.id.about:
                 Toast.makeText(this, "About selected", Toast.LENGTH_LONG).show();
                 return(true);
 
+            case R.id.logout:
+                Toast.makeText(this, "Log out selected", Toast.LENGTH_LONG).show();
+                Intent logoutIntent = new Intent(this, LoginActivity.class);
+                startActivity(logoutIntent);    // launch new activity
+                return(true);
+
             case R.id.exit:
                 Toast.makeText(this, "Good bye user", Toast.LENGTH_LONG).show();
                 finish();
                 return(true);
+
+
 
         }
         return(super.onOptionsItemSelected(item));
@@ -225,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
     public void changeImageFragment(String imageIdentifier, int imageCount) {
         resetSeekBar();
 
-        PictureGalleryFragment pictureFragment = PictureGalleryFragment.newInstance(imageIdentifier, imageCount); // create a new fragment with passed in info to select specified image
+        pictureFragment = PictureGalleryFragment.newInstance(imageIdentifier, imageCount); // create a new fragment with passed in info to select specified image
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();   // transaction object
         transaction.replace(R.id.pictureGalleryFragment, pictureFragment);  // swap and replace in second param. into first param
         transaction.addToBackStack(null);
